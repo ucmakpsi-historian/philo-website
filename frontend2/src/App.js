@@ -1,12 +1,12 @@
 // Paws for a Cause 2026 — Disco Dawgs — Alpha Kappa Psi
 // Updated by Steven Navas & Ami Ogbonna
-
+ 
 import React, { useState, useEffect } from "react";
 import "./App.css";
-
+ 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+ 
   return (
     <header className="header">
       <nav className="nav-container">
@@ -202,9 +202,7 @@ const Philanthropy = () => {
 };
 
 // ── Calendar updated to March 16–20 with events from slides ──────────────────
-const Calendar = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-
+const Calendar = ({ openPopup }) => {
   const events = {
     "3/16": [
       { title: "🎙️ Toy Talks", description: "Scholar's Lane | 10AM–2PM. Come talk to Brothers to earn points! 5,000 pts per talk. Pup Pops available: $3 for 1, $5 for 2 ($1 = 1,000 pts). Key chains for purchase for extra points!" },
@@ -234,32 +232,21 @@ const Calendar = () => {
       { title: "🥤 Aguas Frescas", description: "Available at Dawg Ball. $1 = +1,500 pts." },
     ],
   };
-
+ 
+  const dayLabels = { "3/16": "Monday 3/16", "3/17": "Tuesday 3/17", "3/18": "Wednesday 3/18", "3/19": "Thursday 3/19", "3/20": "Friday 3/20" };
+ 
   return (
     <section id="calendar" className="calendar">
       <h2 className="calendar-title">Calendar</h2>
       <div className="train-track">
         {["3/16", "3/17", "3/18", "3/19", "3/20"].map((date) => (
-          <div key={date} className="train-stop" onClick={() => setSelectedDate(date)}>
+          <div key={date} className="train-stop" onClick={() =>
+            openPopup({ title: dayLabels[date], events: events[date] })
+          }>
             <div className="train-stop-date">{date}</div>
           </div>
         ))}
       </div>
-
-      {selectedDate && (
-        <div className="popup">
-          <div className="popup-content">
-            <h3>{selectedDate === "3/16" ? "Monday 3/16" : selectedDate === "3/17" ? "Tuesday 3/17" : selectedDate === "3/18" ? "Wednesday 3/18" : selectedDate === "3/19" ? "Thursday 3/19" : "Friday 3/20"}</h3>
-            {events[selectedDate].map((event, index) => (
-              <div key={index}>
-                <h4>{event.title}</h4>
-                <p>{event.description}</p>
-              </div>
-            ))}
-            <button onClick={() => setSelectedDate(null)} className="close-popup">Close</button>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
@@ -302,22 +289,25 @@ const Gallery = () => {
     "https://i.imgur.com/6bd7OHl.png",
     "https://i.imgur.com/qnD52Hj.png",
     "https://i.imgur.com/KVL9blA.png",
+    "https://imgur.com/ndJ4TIU.png",
+    "https://imgur.com/H8Jt8Cb.png",
+    "https://imgur.com/aAob04g.png",
+    "https://imgur.com/Tfr9opt.png",
+    "https://imgur.com/otk1gwC.png",
   ];
 
+   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const nextImage = () => setCurrentImageIndex(i => (i + 1) % images.length);
   const prevImage = () => setCurrentImageIndex(i => (i - 1 + images.length) % images.length);
-
+ 
   return (
     <section id="gallery" className="gallery">
       <h2 className="gallery-title">Gallery</h2>
       <div className="carousel">
         <button className="carousel-btn prev" onClick={prevImage}>❮</button>
         <div className="carousel-image-container">
-          <img
-            src={images[currentImageIndex]}
-            alt={`Gallery Image ${currentImageIndex + 1}`}
-            className="carousel-image"
+          <img src={images[currentImageIndex]}  alt={`Gallery Image ${currentImageIndex + 1}`} className="carousel-image"
           />
         </div>
         <button className="carousel-btn next" onClick={nextImage}>❯</button>
@@ -325,10 +315,8 @@ const Gallery = () => {
     </section>
   );
 };
-
-const History = () => {
-  const [selectedYear, setSelectedYear] = useState(null);
-
+ 
+const History = ({ openPopup }) => {
   const historyData = {
     '2023': {
       title: 'Paws for a Cause 2023',
@@ -341,34 +329,22 @@ const History = () => {
       image: 'https://i.imgur.com/3s32AhV.png',
     },
   };
-
+ 
   return (
     <div id="history" className="history">
       <h2 className="history-title">History</h2>
       <div className="history-btn-container">
-        <button className="history-btn" onClick={() => setSelectedYear('2023')}>Paws for a Cause 2023</button>
-        <button className="history-btn" onClick={() => setSelectedYear('2024')}>Paws for a Cause 2024</button>
+        <button className="history-btn" onClick={() => openPopup({ title: historyData['2023'].title, description: historyData['2023'].description, image: historyData['2023'].image })}>Paws for a Cause 2023</button>
+        <button className="history-btn" onClick={() => openPopup({ title: historyData['2024'].title, description: historyData['2024'].description, image: historyData['2024'].image })}>Paws for a Cause 2024</button>
       </div>
-
-      {selectedYear && (
-        <div className="popup">
-          <div className="popup-content">
-            <h3 className="popup-title">{historyData[selectedYear].title}</h3>
-            <p className="popup-description">{historyData[selectedYear].description}</p>
-            <button className="close-popup" onClick={() => setSelectedYear(null)}>Close</button>
-          </div>
-          <div className="popup-image">
-            <img src={historyData[selectedYear].image} alt={selectedYear} />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
-
+ 
+ 
 const SocialLinks = ({ className }) => (
   <div className={className}>
-    <a href="https://www.instagram.com/ucmakpsi" target="_blank" rel="noopener noreferrer" className="circle instagram">
+    <a href="https://www.instagram.com/ucmakpsiphilo" target="_blank" rel="noopener noreferrer" className="circle instagram">
       <i className="fab fa-instagram"></i>
     </a>
     <a href="https://www.tiktok.com/@ucmakpsi" target="_blank" rel="noopener noreferrer" className="circle tiktok">
@@ -380,30 +356,32 @@ const SocialLinks = ({ className }) => (
   </div>
 );
 
+
+
 const StickyLinks = () => {
   const [isMobile, setIsMobile] = useState(false);
-
+ 
   useEffect(() => {
     const checkIfMobile = () => setIsMobile(window.innerWidth <= 768);
     checkIfMobile();
     window.addEventListener('resize', checkIfMobile);
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
-
+ 
   if (isMobile) return null;
   return <SocialLinks className="sticky-links" />;
 };
-
+ 
 const Footer = () => {
   const [isMobile, setIsMobile] = useState(false);
-
+ 
   useEffect(() => {
     const checkIfMobile = () => setIsMobile(window.innerWidth <= 768);
     checkIfMobile();
     window.addEventListener('resize', checkIfMobile);
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
-
+ 
   return (
     <footer className="footer">
       <p>Alpha Kappa Psi — Psi Upsilon Chapter</p>
@@ -412,19 +390,72 @@ const Footer = () => {
     </footer>
   );
 };
-
-const App = () => (
-  <div>
-    <Header />
-    <PupPoints />
-    <Philanthropy />
-    <Calendar />
-    <TopDawgs />
-    <Gallery />
-    <History />
-    <StickyLinks />
-    <Footer />
-  </div>
-);
-
+ 
+// ── Global Popup rendered at root level so it's never clipped ─────────────────
+const GlobalPopup = ({ popup, onClose }) => {
+  if (!popup) return null;
+ 
+  // History popup — image sits OUTSIDE and BESIDE the popup box
+  if (popup.image) {
+    return (
+      <div className="popup" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+        style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: '2rem' }}>
+        <div className="popup-content" style={{ maxWidth: '460px', width: '50vw' }}>
+          <h3 className="popup-title">{popup.title}</h3>
+          <p className="popup-description">{popup.description}</p>
+          <button className="close-popup" onClick={onClose}>Close</button>
+        </div>
+        <div className="popup-image">
+          <img src={popup.image} alt={popup.title} />
+        </div>
+      </div>
+    );
+  }
+ 
+  // Calendar popup — standard centered layout
+  return (
+    <div className="popup" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+      <div className="popup-content">
+        {popup.title && <h3 className="popup-title">{popup.title}</h3>}
+        {popup.events && popup.events.map((event, i) => (
+          <div key={i}>
+            <h4>{event.title}</h4>
+            <p>{event.description}</p>
+          </div>
+        ))}
+        <button className="close-popup" onClick={onClose}>Close</button>
+      </div>
+    </div>
+  );
+};
+ 
+const App = () => {
+  const [popup, setPopup] = useState(null);
+ 
+  const openPopup = (data) => {
+    setPopup(data);
+    document.body.classList.add('popup-open');
+  };
+ 
+  const closePopup = () => {
+    setPopup(null);
+    document.body.classList.remove('popup-open');
+  };
+ 
+  return (
+    <div>
+      <Header />
+      <PupPoints />
+      <Philanthropy />
+      <Calendar openPopup={openPopup} />
+      <TopDawgs />
+      <Gallery />
+      <History openPopup={openPopup} />
+      <StickyLinks />
+      <Footer />
+      <GlobalPopup popup={popup} onClose={closePopup} />
+    </div>
+  );
+};
+ 
 export default App;
