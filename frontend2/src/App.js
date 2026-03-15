@@ -33,13 +33,12 @@ const organizations = [
   { rank: 2,  name: "Kappa Sigma",            score: 0, category: "Socials",       instagram: "https://instagram.com/kappasigmaucm" },
   { rank: 3,  name: "Phi Mu",                 score: 0, category: "Sororities",    instagram: "https://instagram.com/ucmercedphimu" },
   { rank: 4,  name: "Delta Gamma",            score: 0, category: "Sororities",    instagram: "https://instagram.com/ucmdeltagamma" },
-  { rank: 5,  name: "Delta Delta Delta",      score: 0, category: "Sororities",    instagram: "https://instagram.com/ucmtridelta" },
-  { rank: 6,  name: "Business Society",       score: 0, category: "Organizations", instagram: "https://instagram.com/ucm_businessociety" },
-  { rank: 7,  name: "Theta Tau",              score: 0, category: "Professionals", instagram: "https://instagram.com/mdthetatau" },
-  { rank: 8,  name: "Delta Sigma Pi",         score: 0, category: "Professionals", instagram: "https://instagram.com/ucmdeltasigmapi" },
-  { rank: 9,  name: "Sigma Chi",              score: 0, category: "Socials",       instagram: "https://instagram.com/ucmsigmachi" },
-  { rank: 10, name: "Delta Epsilon Mu",       score: 0, category: "Professionals", instagram: "https://instagram.com/dem_theta" },
-  { rank: 11, name: "Kappa Kappa Gamma",      score: 0, category: "Professionals", instagram: "https://instagram.com/kappaucm" },
+  { rank: 5,  name: "College Democrats at UC Merced",       score: 0, category: "Organizations", instagram: "https://instagram.com/ucm_businessociety" },
+  { rank: 6,  name: "Theta Tau",              score: 0, category: "Professionals", instagram: "https://instagram.com/mdthetatau" },
+  { rank: 7,  name: "Delta Sigma Pi",         score: 0, category: "Professionals", instagram: "https://instagram.com/ucmdeltasigmapi" },
+  { rank: 8,  name: "Sigma Chi",              score: 0, category: "Socials",       instagram: "https://instagram.com/ucmsigmachi" },
+  { rank: 9, name: "Delta Epsilon Mu",       score: 0, category: "Professionals", instagram: "https://instagram.com/dem_theta" },
+  { rank: 10, name: "Kappa Kappa Gamma",      score: 0, category: "Professionals", instagram: "https://instagram.com/kappaucm" },
 ];
 
 const PupPoints = () => {
@@ -328,6 +327,11 @@ const History = ({ openPopup }) => {
       description: "Our 2nd Annual Paws for a Cause was led by Sebastian Garcia! Alpha Kappa Psi raised $7,416 with 13 organizations participating — a record! He introduced the Top Dawg award. Congratulations to Kappa Sigma's Malcolm Berry for being our first TOP DAWG and to Delta Sigma Pi for becoming our Second Top Organization! Special thanks to Celsius for partnering with us!",
       image: 'https://i.imgur.com/3s32AhV.png',
     },
+    '2025': {
+      title: 'Paws for a Cause 2025',
+      description: "Our 3rd Annual Paws for a Cause raised over $10,000 — a new record! With 13 organizations participating, the energy was electric. In collaboration with New Beginnings for Merced County Animals, we continued our mission of finding homes for animals in need. Congratulations to Pi Kappa Phi for becoming our Top Organization and to Ethan of Kappa Sigma for taking home the Top Dawg award!",
+      image: 'https://imgur.com/KFudp8V.png',
+    },
   };
  
   return (
@@ -336,6 +340,7 @@ const History = ({ openPopup }) => {
       <div className="history-btn-container">
         <button className="history-btn" onClick={() => openPopup({ title: historyData['2023'].title, description: historyData['2023'].description, image: historyData['2023'].image })}>Paws for a Cause 2023</button>
         <button className="history-btn" onClick={() => openPopup({ title: historyData['2024'].title, description: historyData['2024'].description, image: historyData['2024'].image })}>Paws for a Cause 2024</button>
+        <button className="history-btn" onClick={() => openPopup({ title: historyData['2025'].title, description: historyData['2025'].description, image: historyData['2025'].image })}>Paws for a Cause 2025</button>
       </div>
     </div>
   );
