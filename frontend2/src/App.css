@@ -1,10 +1,31 @@
 /* ============================================================
    Paws for a Cause 2025 — Hazy Disco Theme
-   Fonts: Righteous (display) + Raleway (body)
+   Fonts: MoreValentine (title) + Kage Retro (display) + Dropline (body)
    Palette: Deep Purple / Hot Magenta / Gold
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Raleway:wght@400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+@font-face {
+  font-family: 'MoreValentine';
+  src: url('MoreValentine.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kage Retro';
+  src: url('Kage Retro.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dropline';
+  src: url('Dropline.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* ─── CSS VARIABLES ──────────────────────────────────────── */
 :root {
@@ -32,7 +53,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Dropline', sans-serif;
   background-color: #0a0010;
   background-image:
     radial-gradient(ellipse at 20% 15%,  rgba(200, 0, 180, 0.50) 0%, transparent 50%),
@@ -71,26 +92,33 @@ body::before {
   100% { opacity: 0.7; transform: scale(1.04) translateX(-8px); }
 }
 
-/* Spinning disco ball light beams */
+/* Disco ball light beams — spinning, center above page */
 body::after {
   content: '';
   position: fixed;
-  inset: 0;
+  top: -300%;
+  left: -100%;
+  width: 300%;
+  height: 500%;
   background: repeating-conic-gradient(
-    from 0deg at 50% -10%,
-    rgba(255, 220, 80,  0.06) 0deg   4deg,
-    transparent               4deg  18deg,
-    rgba(255, 0,   200, 0.05) 18deg 22deg,
-    transparent              22deg  36deg,
-    rgba(100, 0,   255, 0.05) 36deg 40deg,
-    transparent              40deg  54deg,
-    rgba(0,   220, 255, 0.04) 54deg 58deg,
-    transparent              58deg  72deg
+    from 0deg at 50% 18%,
+    rgba(255, 220, 80,  0.07) 0deg   2deg,
+    transparent               2deg  12deg,
+    rgba(255, 0,   200, 0.06) 12deg 14deg,
+    transparent              14deg  24deg,
+    rgba(100, 0,   255, 0.06) 24deg 26deg,
+    transparent              26deg  36deg,
+    rgba(0,   220, 255, 0.05) 36deg 38deg,
+    transparent              38deg  48deg,
+    rgba(255, 100, 150, 0.06) 48deg 50deg,
+    transparent              50deg  60deg,
+    rgba(200, 255,   0, 0.04) 60deg 62deg,
+    transparent              62deg  72deg
   );
   pointer-events: none;
   z-index: 0;
-  animation: beam-spin 20s linear infinite;
-  transform-origin: 50% -10%;
+  animation: beam-spin 18s linear infinite;
+  transform-origin: 50% 18%;
 }
 
 @keyframes beam-spin {
@@ -129,15 +157,16 @@ body::after {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 0.4rem;
 }
 
 .title {
-  font-family: 'Righteous', cursive;
-  font-size: 1.7rem;
-  letter-spacing: 0.08em;
-  background: linear-gradient(135deg, var(--gold-light) 0%, #ff80d5 45%, var(--gold) 100%);
+  font-family: 'MoreValentine', cursive;
+  font-size: 2.2rem;
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #ff2dbd 0%, #ff80d5 40%, var(--gold-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -166,7 +195,7 @@ body::after {
 
 .nav-item {
   text-decoration: none;
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   color: var(--text-lavender);
   font-size: 1.05rem;
   letter-spacing: 0.06em;
@@ -183,7 +212,7 @@ body::after {
 
   .nav-links {
     position: absolute;
-    top: 60px;
+    top: 80px;
     right: 0;
     background: linear-gradient(180deg, rgba(14,0,24,0.98), rgba(42,0,69,0.98));
     border-top: 1px solid var(--border-gold);
@@ -207,7 +236,7 @@ body::after {
 }
 
 .leaderboard-title {
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 2.4rem;
   letter-spacing: 0.1em;
   color: var(--gold-light);
@@ -224,7 +253,7 @@ body::after {
   padding: 0.5rem 1.1rem;
   margin: 0.3rem;
   font-size: 0.95rem;
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   letter-spacing: 0.05em;
   cursor: pointer;
   border-radius: 5px;
@@ -260,7 +289,7 @@ body::after {
 .leaderboard th {
   background: linear-gradient(90deg, var(--purple-bright), var(--magenta), var(--purple-bright));
   color: var(--gold-light);
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 1.1rem;
   letter-spacing: 0.08em;
   text-shadow: 0 0 8px var(--glow-gold);
@@ -268,7 +297,7 @@ body::after {
 
 .leaderboard td {
   color: var(--text-lavender);
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Dropline', sans-serif;
   font-weight: 600;
 }
 
@@ -306,7 +335,7 @@ body::after {
 }
 
 .philanthropy-title {
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 2.6rem;
   letter-spacing: 0.1em;
   margin-bottom: 35px;
@@ -365,7 +394,7 @@ body::after {
 .philanthropy-box.flipped .back  { transform: rotateY(0deg); }
 
 .philanthropy-box h3 {
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 1.5rem;
   margin: 14px 0;
   color: var(--gold-light);
@@ -374,7 +403,7 @@ body::after {
 }
 
 .philanthropy-box p {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Dropline', sans-serif;
   font-size: 1rem;
   margin-bottom: 10px;
   color: var(--text-lavender);
@@ -407,7 +436,7 @@ body::after {
   border: 1px solid var(--border-gold);
   border-radius: 6px;
   font-size: 0.95rem;
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   letter-spacing: 0.06em;
   cursor: pointer;
   transition: background 0.3s, box-shadow 0.3s, color 0.3s;
@@ -436,7 +465,7 @@ body::after {
 }
 
 .calendar-title {
-  font-family: 'Righteous', cursive;
+  font-family: ' kage Retro', cursive;
   font-size: 2.6rem;
   letter-spacing: 0.1em;
   color: var(--gold-light);
@@ -467,7 +496,7 @@ body::after {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Righteous', cursive;
+  font-family: ' Kage Retro', cursive;
   color: var(--gold-light);
   transition: transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 0 18px var(--glow-magenta);
@@ -484,7 +513,7 @@ body::after {
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--gold-light);
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 0.9rem;
   text-shadow: 0 0 6px var(--glow-gold);
 }
@@ -550,7 +579,7 @@ body::after {
 
 .popup-content h3,
 .popup-title {
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 1.9rem;
   color: var(--gold-light);
   margin-bottom: 0.5rem;
@@ -559,7 +588,7 @@ body::after {
 }
 
 .popup-content h4 {
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 1.2rem;
   color: #e080ff;
   margin: 0.6rem 0 0.2rem;
@@ -568,7 +597,7 @@ body::after {
 
 .popup-content p,
 .popup-description {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Dropline', sans-serif;
   font-size: 1rem;
   color: var(--text-lavender);
   line-height: 1.6;
@@ -597,7 +626,7 @@ body::after {
   border: 1px solid var(--border-gold);
   padding: 10px 28px;
   font-size: 1rem;
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   letter-spacing: 0.06em;
   border-radius: 6px;
   cursor: pointer;
@@ -629,7 +658,7 @@ body::after {
 }
 
 .section-title {
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 2.6rem;
   letter-spacing: 0.1em;
   margin-bottom: 35px;
@@ -671,7 +700,7 @@ body::after {
 }
 
 .candidate-name {
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 1.2rem;
   letter-spacing: 0.05em;
   margin-top: 14px;
@@ -680,7 +709,7 @@ body::after {
 }
 
 .candidate-organization {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Dropline', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: #e080ff;
@@ -701,7 +730,7 @@ body::after {
 }
 
 .gallery-title {
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 2.6rem;
   letter-spacing: 0.1em;
   margin-bottom: 30px;
@@ -767,7 +796,7 @@ body::after {
 }
 
 .history-title {
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   font-size: 2.6rem;
   letter-spacing: 0.1em;
   color: var(--gold-light);
@@ -789,7 +818,7 @@ body::after {
   padding: 1rem 2rem;
   border: 1px solid var(--border-gold);
   border-radius: 8px;
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   letter-spacing: 0.06em;
   cursor: pointer;
   transition: background 0.3s, box-shadow 0.3s, color 0.3s;
@@ -819,8 +848,8 @@ body::after {
 }
 
 .circle {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   background: rgba(20, 0, 40, 0.85);
   border: 1px solid var(--border-gold);
   border-radius: 50%;
@@ -828,10 +857,15 @@ body::after {
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 12px var(--glow-magenta);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--gold-light);
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   text-decoration: none;
+}
+
+.circle i {
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
 .circle:hover {
@@ -864,7 +898,7 @@ body::after {
   width: 100%;
   text-align: center;
   padding: 18px 12px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Dropline', sans-serif;
   font-size: 0.88rem;
   letter-spacing: 0.05em;
   background: linear-gradient(90deg, rgba(14,0,24,0.98), rgba(42,0,69,0.98), rgba(14,0,24,0.98));
@@ -903,7 +937,7 @@ body::after {
   border: 1px solid var(--border-gold);
   padding: 0.55rem 1rem;
   font-size: 0.95rem;
-  font-family: 'Righteous', cursive;
+  font-family: 'Kage Retro', cursive;
   letter-spacing: 0.05em;
   cursor: pointer;
   border-radius: 6px;
@@ -936,7 +970,7 @@ body::after {
 .dropdown-item {
   padding: 0.55rem 1rem;
   cursor: pointer;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Dropline', sans-serif;
   font-weight: 600;
   color: var(--text-lavender);
   transition: background 0.25s, color 0.25s;

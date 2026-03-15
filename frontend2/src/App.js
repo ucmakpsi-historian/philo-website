@@ -252,8 +252,7 @@ const Calendar = ({ openPopup }) => {
 
 const TopDawgs = () => {
   const candidates = [
-    { name: "Ethan Han",               organization: "Kappa Sigma",       image: "https://i.imgur.com/WOUFgWD.png" },
-    { name: "Mateo Inzunza",           organization: "Sigma Chi",         image: "https://i.imgur.com/1PFvPmI.png" },
+    
   ];
 
   return (
