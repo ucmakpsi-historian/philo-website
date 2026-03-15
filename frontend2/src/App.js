@@ -188,7 +188,7 @@ const Philanthropy = () => {
             <p>Joe Corona leads Paws for a Cause 2026 and all service events for Alpha Kappa Psi!</p>
           </div>
           <div className="back" onClick={handleBackClick}>
-            <img src="https://i.imgur.com/LexCzA2.png" alt="Joe Corona" />
+            <img src="https://imgur.com/wFZxzS7.png" alt="Joe Corona" />
             <a href="mailto:ucmakpsiphilo@gmail.com">
               <button className="learn-more">Contact Joe</button>
             </a>
