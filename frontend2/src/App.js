@@ -27,24 +27,57 @@ const Header = () => {
   );
 };
 
-// ── Points reset to 0 for new philo week ──────────────────────────────────────
-const organizations = [
-  { rank: 1,  name: "Pi Kappa Phi",          score: 0, category: "Socials",       instagram: "https://instagram.com/ucmpikapp" },
-  { rank: 2,  name: "Kappa Sigma",            score: 0, category: "Socials",       instagram: "https://instagram.com/kappasigmaucm" },
-  { rank: 3,  name: "Phi Mu",                 score: 0, category: "Sororities",    instagram: "https://instagram.com/ucmercedphimu" },
-  { rank: 4,  name: "Delta Gamma",            score: 0, category: "Sororities",    instagram: "https://instagram.com/ucmdeltagamma" },
-  { rank: 5,  name: "College Democrats at UC Merced",       score: 0, category: "Organizations", instagram: "https://instagram.com/ucm_businessociety" },
-  { rank: 6,  name: "Theta Tau",              score: 0, category: "Professionals", instagram: "https://instagram.com/mdthetatau" },
-  { rank: 7,  name: "Delta Sigma Pi",         score: 0, category: "Professionals", instagram: "https://instagram.com/ucmdeltasigmapi" },
-  { rank: 8,  name: "Sigma Chi",              score: 0, category: "Socials",       instagram: "https://instagram.com/ucmsigmachi" },
-  { rank: 9, name: "Delta Epsilon Mu",       score: 0, category: "Professionals", instagram: "https://instagram.com/dem_theta" },
-  { rank: 10, name: "Kappa Kappa Gamma",      score: 0, category: "Professionals", instagram: "https://instagram.com/kappaucm" },
-];
+// ── Org metadata (category + instagram) — backend only returns name + points ──
+const ORG_META = {
+  "Pi Kappa Phi":                      { category: "Socials",       instagram: "https://instagram.com/ucmpikapp" },
+  "Kappa Sigma":                       { category: "Socials",       instagram: "https://instagram.com/kappasigmaucm" },
+  "Phi Mu":                            { category: "Sororities",    instagram: "https://instagram.com/ucmercedphimu" },
+  "Delta Gamma":                       { category: "Sororities",    instagram: "https://instagram.com/ucmdeltagamma" },
+  "College Democrats at UC Merced":    { category: "Organizations", instagram: "https://instagram.com/ucm_businessociety" },
+  "Theta Tau":                         { category: "Professionals", instagram: "https://instagram.com/mdthetatau" },
+  "Delta Sigma Pi":                    { category: "Professionals", instagram: "https://instagram.com/ucmdeltasigmapi" },
+  "Sigma Chi":                         { category: "Socials",       instagram: "https://instagram.com/ucmsigmachi" },
+  "Delta Epsilon Mu":                  { category: "Professionals", instagram: "https://instagram.com/dem_theta" },
+  "Kappa Kappa Gamma":                 { category: "Sororities",    instagram: "https://instagram.com/kappaucm" },
+};
+
+// ── Change this to your deployed backend URL when live ────────────────────────
+const BACKEND_URL = "http://localhost:5000";
 
 const PupPoints = () => {
   const [filter, setFilter] = useState("All");
   const [isMobile, setIsMobile] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [organizations, setOrganizations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch live leaderboard from Flask backend, auto-refresh every 60s
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        const res = await fetch(`${BACKEND_URL}/leaderboard`);
+        if (!res.ok) throw new Error("Failed to fetch");
+        const data = await res.json();
+        const merged = data.map((item, index) => {
+          const name = item["Orgs"] || item["Organization"] || "";
+          const score = item["Total Points"] || item["Points"] || 0;
+          const meta = ORG_META[name] || { category: "Organizations", instagram: "#" };
+          return { rank: index + 1, name, score, ...meta };
+        });
+        setOrganizations(merged);
+        setError(null);
+      } catch (err) {
+        setError("Could not load leaderboard. Check that the backend is running.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLeaderboard();
+    const interval = setInterval(fetchLeaderboard, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const checkIfMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -61,7 +94,7 @@ const PupPoints = () => {
   const filteredOrgs =
     filter === "All" ? organizations : organizations.filter(org => org.category === filter);
 
-  const categories = ['All', 'Socials', 'Sororities', 'Professionals'];
+  const categories = ['All', 'Socials', 'Sororities', 'Professionals', 'Organizations'];
 
   return (
     <section id="pup-points" className="pup-points">
@@ -108,7 +141,13 @@ const PupPoints = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredOrgs.map(org => (
+          {loading && (
+            <tr><td colSpan="3" style={{ textAlign: 'center', padding: '2rem', color: 'var(--gold-light)' }}>Loading scores...</td></tr>
+          )}
+          {error && (
+            <tr><td colSpan="3" style={{ textAlign: 'center', padding: '2rem', color: '#ff80d5' }}>{error}</td></tr>
+          )}
+          {!loading && !error && filteredOrgs.map(org => (
             <tr key={org.rank}>
               <td><strong>{org.rank}</strong></td>
               <td>
@@ -251,9 +290,7 @@ const Calendar = ({ openPopup }) => {
 };
 
 const TopDawgs = () => {
-  const candidates = [
-    
-  ];
+  const candidates = [];
 
   return (
     <section id="top-dawgs" className="top-dawgs">
@@ -294,7 +331,6 @@ const Gallery = () => {
     "https://imgur.com/otk1gwC.png",
   ];
 
-   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const nextImage = () => setCurrentImageIndex(i => (i + 1) % images.length);
   const prevImage = () => setCurrentImageIndex(i => (i - 1 + images.length) % images.length);
@@ -305,8 +341,7 @@ const Gallery = () => {
       <div className="carousel">
         <button className="carousel-btn prev" onClick={prevImage}>❮</button>
         <div className="carousel-image-container">
-          <img src={images[currentImageIndex]}  alt={`Gallery Image ${currentImageIndex + 1}`} className="carousel-image"
-          />
+          <img src={images[currentImageIndex]} alt={`Gallery Image ${currentImageIndex + 1}`} className="carousel-image" />
         </div>
         <button className="carousel-btn next" onClick={nextImage}>❯</button>
       </div>
@@ -345,7 +380,6 @@ const History = ({ openPopup }) => {
   );
 };
  
- 
 const SocialLinks = ({ className }) => (
   <div className={className}>
     <a href="https://www.instagram.com/ucmakpsiphilo" target="_blank" rel="noopener noreferrer" className="circle instagram">
@@ -359,8 +393,6 @@ const SocialLinks = ({ className }) => (
     </a>
   </div>
 );
-
-
 
 const StickyLinks = () => {
   const [isMobile, setIsMobile] = useState(false);

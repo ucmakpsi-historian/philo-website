@@ -117,7 +117,7 @@ body::after {
   );
   pointer-events: none;
   z-index: 0;
-  animation: beam-spin 18s linear infinite;
+  animation: beam-spin 20s linear infinite;
   transform-origin: 50% 18%;
 }
 
@@ -465,7 +465,7 @@ body::after {
 }
 
 .calendar-title {
-  font-family: ' kage Retro', cursive;
+  font-family: ' Kage Retro', cursive;
   font-size: 2.6rem;
   letter-spacing: 0.1em;
   color: var(--gold-light);
