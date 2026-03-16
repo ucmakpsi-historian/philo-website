@@ -1,5 +1,6 @@
 flask
 flask-cors
-requests
+gspread
 pandas
+google-auth
 gunicorn

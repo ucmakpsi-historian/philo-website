@@ -51,7 +51,8 @@ const ORG_META = {
 };
 
 // ── Change this to your deployed backend URL when live ────────────────────────
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "https://alpha-kappa-psi-2026-paws-for-a-cause.onrender.com";
+
 
 const PupPoints = () => {
   const [filter, setFilter] = useState("All");
