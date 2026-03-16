@@ -1,41 +1,32 @@
-import gspread
+import requests
 import pandas as pd
-from google.oauth2.service_account import Credentials
+import os
 
-# Define the required scopes
-scopes = [
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/drive'
-]
-
-# Authenticate using the service account file
-gc = gspread.service_account(filename='credentials.json', scopes=scopes)
+# ── Paste your Apps Script deployment URL here ────────────────────────────────
+# Or set APPS_SCRIPT_URL as an environment variable on Render
+APPS_SCRIPT_URL = os.environ.get(
+    "APPS_SCRIPT_URL",
+    "YOUR_APPS_SCRIPT_URL_HERE"  # replace with your URL for local testing
+)
 
 def get_leaderboard():
-    # Open the Google Sheet by its name
     try:
-        sh = gc.open("AKPSI Philo Week 2026 - NEW")
-    except gspread.SpreadsheetNotFound:
-        print("Spreadsheet not found. Please check the name and sharing permissions.")
-        exit()
+        response = requests.get(APPS_SCRIPT_URL, allow_redirects=True)
+        response.raise_for_status()
+        data = response.json()
 
-    # Select a worksheet
-    worksheet = sh.worksheet("Total Points")
+        df = pd.DataFrame(data)
 
-    #List headers of the Google Sheets file
+        if 'Orgs' not in df.columns or 'Total Points' not in df.columns:
+            print("Unexpected columns:", df.columns.tolist())
+            return None
 
-    custom_headers = ['Organization','Points']
+        leaderboard = df[['Orgs', 'Total Points']].sort_values(
+            by='Total Points', ascending=False
+        ).reset_index(drop=True)
 
+        return leaderboard
 
-    data = worksheet.get_all_records(expected_headers=custom_headers)
-
-    # Convert the data into a pandas DataFrame 
-    df = pd.DataFrame(data)
-    orgs_and_points= df[['Orgs','Total Points']]
-    leaderboard = orgs_and_points.sort_values(by='Total Points', ascending=False)
-
-
-    return leaderboard
-        
-
-
+    except Exception as e:
+        print(f"Error fetching leaderboard: {e}")
+        return None
