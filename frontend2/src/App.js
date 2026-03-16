@@ -29,16 +29,25 @@ const Header = () => {
 
 // ── Org metadata (category + instagram) — backend only returns name + points ──
 const ORG_META = {
-  "Pi Kappa Phi":                      { category: "Socials",       instagram: "https://instagram.com/ucmpikapp" },
-  "Kappa Sigma":                       { category: "Socials",       instagram: "https://instagram.com/kappasigmaucm" },
-  "Phi Mu":                            { category: "Sororities",    instagram: "https://instagram.com/ucmercedphimu" },
-  "Delta Gamma":                       { category: "Sororities",    instagram: "https://instagram.com/ucmdeltagamma" },
-  "College Democrats at UC Merced":    { category: "Organizations", instagram: "https://instagram.com/ucm_businessociety" },
-  "Theta Tau":                         { category: "Professionals", instagram: "https://instagram.com/mdthetatau" },
-  "Delta Sigma Pi":                    { category: "Professionals", instagram: "https://instagram.com/ucmdeltasigmapi" },
-  "Sigma Chi":                         { category: "Socials",       instagram: "https://instagram.com/ucmsigmachi" },
-  "Delta Epsilon Mu":                  { category: "Professionals", instagram: "https://instagram.com/dem_theta" },
-  "Kappa Kappa Gamma":                 { category: "Sororities",    instagram: "https://instagram.com/kappaucm" },
+  "Sigma Chi":                      { category: "Socials",       instagram: "https://instagram.com/ucmsigmachi" },
+  "Tri Delta":                      { category: "Sororities",    instagram: "https://instagram.com/ucmtridelta" },
+  "Delta Delta Delta":              { category: "Sororities",    instagram: "https://instagram.com/ucmtridelta" },
+  "Phi Mu":                         { category: "Sororities",    instagram: "https://instagram.com/ucmercedphimu" },
+  "Delta Epsilon Mu":               { category: "Professionals", instagram: "https://instagram.com/dem_theta" },
+  "Delta Sigma Pi":                 { category: "Professionals", instagram: "https://instagram.com/ucmdeltasigmapi" },
+  "Theta Tau":                      { category: "Professionals", instagram: "https://instagram.com/mdthetatau" },
+  "Sigma Theta Psi":                { category: "Sororities",    instagram: "https://instagram.com/ucm_stpnu" },
+  "Delta Gamma":                    { category: "Sororities",    instagram: "https://instagram.com/ucmdeltagamma" },
+  "Business Society":               { category: "Organizations", instagram: "https://instagram.com/ucm_businessociety" },
+  "Phi Delta Epsilon":              { category: "Professionals", instagram: "https://instagram.com/ucmercedphide" },
+  "Phi Alpha Delta":                { category: "Professionals", instagram: "https://instagram.com/philalphadelta" },
+  "Campus Activities Board":        { category: "Organizations", instagram: "https://instagram.com/ucmercedcab" },
+  "Kappa Sigma":                    { category: "Socials",       instagram: "https://instagram.com/kappasigmaucm" },
+  "Rotaract Club":                  { category: "Organizations", instagram: "https://instagram.com/ucmercedrotaract" },
+  "Pi Kappa Phi":                   { category: "Socials",       instagram: "https://instagram.com/ucmpikapp" },
+  "Merced Pre-Law Society":         { category: "Organizations", instagram: "https://instagram.com/ucm.mpls" },
+  "College Democrats at UC Merced": { category: "Organizations", instagram: "https://instagram.com/ucmdemocrats" },
+  "Kappa Kappa Gamma":              { category: "Sororities",    instagram: "https://instagram.com/kappaucm" },
 };
 
 // ── Change this to your deployed backend URL when live ────────────────────────
